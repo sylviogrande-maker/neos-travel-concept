@@ -23,7 +23,7 @@
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{font-family:var(--font-b);color:var(--text);background:var(--pearl);overflow-x:hidden;line-height:1.7;font-size:16px}
 body.menu-open{overflow:hidden}
-body.cursor-active *{cursor:none!important}
+body.cursor-active,body.cursor-active *,html:has(body.cursor-active){cursor:none!important}
 img{max-width:100%;height:auto;display:block}
 a{text-decoration:none;color:inherit}
 button{font-family:var(--font-b);cursor:pointer}
