@@ -26,18 +26,30 @@ if (nav) {
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 if (hamburger && mobileMenu) {
+    const openMenu = () => {
+        hamburger.classList.add('active');
+        mobileMenu.classList.add('active');
+        document.body.classList.add('menu-open');
+        // iOS Safari fix: prevent body scroll
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+    };
+    const closeMenu = () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        // iOS Safari fix: restore scroll
+        document.body.style.position = '';
+        document.body.style.width = '';
+    };
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        mobileMenu.classList.contains('active') ? closeMenu() : openMenu();
     });
     mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
+        a.addEventListener('click', closeMenu);
     });
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 }
 
 // ─── CUSTOM CURSOR ───
@@ -139,7 +151,12 @@ if (slides.length > 1) {
         slides[cur].classList.remove('active');
         if (dots[cur]) dots[cur].classList.remove('active');
         cur = n;
-        slides[cur].classList.add('active');
+        const slide = slides[cur];
+        slide.classList.add('active');
+        // Force restart of Ken Burns CSS animation on each slide activation
+        slide.style.animation = 'none';
+        void slide.offsetWidth; // trigger reflow to reset animation
+        slide.style.animation = '';
         if (dots[cur]) dots[cur].classList.add('active');
     }
     function nextSlide() { goSlide((cur + 1) % slides.length); }

@@ -102,10 +102,14 @@ ul,ol{list-style:none}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px)}
 
 /* Mobile menu */
-.mobile-menu{position:fixed;inset:0;background:var(--deep);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;opacity:0;visibility:hidden;transition:var(--ease)}
+.mobile-menu{position:fixed;inset:0;background:var(--deep);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease}
 .mobile-menu.active{opacity:1;visibility:visible}
-.mobile-menu>a{font-family:var(--font-d);font-size:clamp(1.5rem,5vw,2.2rem);color:var(--sand);letter-spacing:.08em;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease,color .3s}
-.mobile-menu.active>a{opacity:1;transform:translateY(0)}
+.mobile-menu>a,.mobile-menu>.btn{font-family:var(--font-d);font-size:clamp(1.5rem,5vw,2.2rem);color:var(--sand);letter-spacing:.08em;opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease,color .3s}
+.mobile-menu.active>a:nth-child(1),.mobile-menu.active>.btn:nth-child(1){opacity:1;transform:translateY(0);transition-delay:.08s}
+.mobile-menu.active>a:nth-child(2),.mobile-menu.active>.btn:nth-child(2){opacity:1;transform:translateY(0);transition-delay:.16s}
+.mobile-menu.active>a:nth-child(3),.mobile-menu.active>.btn:nth-child(3){opacity:1;transform:translateY(0);transition-delay:.24s}
+.mobile-menu.active>a:nth-child(4),.mobile-menu.active>.btn:nth-child(4){opacity:1;transform:translateY(0);transition-delay:.32s}
+.mobile-menu.active>a:nth-child(5),.mobile-menu.active>.btn:nth-child(5){opacity:1;transform:translateY(0);transition-delay:.40s}
 .mobile-menu>a:hover{color:var(--coral)}
 
 /* ── BUTTONS ── */
@@ -179,6 +183,13 @@ ul,ol{list-style:none}
 .dest-card:nth-child(4){grid-column:span 4;grid-row:span 2}
 .dest-card:nth-child(5){grid-column:span 4}
 .dest-card:nth-child(6){grid-column:span 4}
+/* Cards 7-12 — fill remaining rows cleanly */
+.dest-card:nth-child(7){grid-column:span 4}
+.dest-card:nth-child(8){grid-column:span 4}
+.dest-card:nth-child(9){grid-column:span 4}
+.dest-card:nth-child(10){grid-column:span 4}
+.dest-card:nth-child(11){grid-column:span 4}
+.dest-card:nth-child(12){grid-column:span 4}
 
 /* ── EXP CARDS ── */
 .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
@@ -332,6 +343,12 @@ footer{background:var(--deep);padding:5rem 0 2rem;color:rgba(244,232,209,.45);bo
     .dest-card:nth-child(4){grid-column:span 6;grid-row:span 1}
     .dest-card:nth-child(5){grid-column:span 3}
     .dest-card:nth-child(6){grid-column:span 3}
+    .dest-card:nth-child(7){grid-column:span 3}
+    .dest-card:nth-child(8){grid-column:span 3}
+    .dest-card:nth-child(9){grid-column:span 2}
+    .dest-card:nth-child(10){grid-column:span 2}
+    .dest-card:nth-child(11){grid-column:span 2}
+    .dest-card:nth-child(12){grid-column:span 6}
     .philo-grid{grid-template-columns:1fr}
     .philo-img{height:350px}
     .contact-inner{grid-template-columns:1fr}
