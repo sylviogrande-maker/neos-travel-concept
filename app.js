@@ -109,6 +109,7 @@ const revealObs = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+window._revealObs = revealObs; // exposed for dynamic content (voyages-config.js)
 
 // ─── WORD REVEAL ───
 document.querySelectorAll('.word-reveal').forEach(el => {
@@ -247,39 +248,47 @@ if (searchInput && searchResults) {
 }
 
 // ─── FILTER BUTTONS ───
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const container = btn.closest('.region-filters');
-        if (!container) return;
-        container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        const filter = btn.dataset.filter;
-        // Find the dest-grid in the same section, searching broadly
-        const section = container.closest('section') || container.parentElement;
-        const grid = section.querySelector('.dest-grid');
-        if (!grid) return;
-        const cards = grid.querySelectorAll('[data-region]');
-        
-        cards.forEach((card, i) => {
-            const show = !filter || filter === 'all' || card.dataset.region === filter;
-            if (show) {
-                card.style.display = '';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px) scale(0.97)';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) scale(1)';
-                }, 60 * i);
-            } else {
-                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px) scale(0.97)';
-                setTimeout(() => { card.style.display = 'none'; }, 300);
-            }
-        });
+function applyFilter(btn) {
+    const container = btn.closest('.region-filters');
+    if (!container) return;
+    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    const section = container.closest('section') || container.parentElement;
+    const grid = section.querySelector('.dest-grid');
+    if (!grid) return;
+    const cards = grid.querySelectorAll('[data-region]');
+
+    cards.forEach((card, i) => {
+        const show = !filter || filter === 'all' || card.dataset.region === filter;
+        if (show) {
+            card.style.display = '';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px) scale(0.97)';
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 60 * i);
+        } else {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px) scale(0.97)';
+            setTimeout(() => { card.style.display = 'none'; }, 300);
+        }
     });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn));
+});
+
+// Re-apply "Toutes" filter after dynamic content has been rendered by voyages-config.js
+// Uses a small delay to ensure DOMContentLoaded has fired and cards are in the DOM
+window.addEventListener('load', () => {
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    if (allBtn) applyFilter(allBtn);
 });
 
 // ─── FAVORITES ───

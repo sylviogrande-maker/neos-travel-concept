@@ -59,7 +59,7 @@ const NEOS_CONFIG = {
       region: "Asie",
       regionFilter: "asie",
       description: "Le royaume du bonheur — Tiger's Nest, monastères et randonnées",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80&fit=crop",
       lien: "alacarte.html#asie"
     },
     {
@@ -67,7 +67,7 @@ const NEOS_CONFIG = {
       region: "Régions Polaires",
       regionFilter: "polaires",
       description: "Icebergs et faune extraordinaire",
-      image: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=900&q=80&fit=crop",
       lien: "plongee.html#polaires"
     },
     {
@@ -99,7 +99,7 @@ const NEOS_CONFIG = {
       region: "Méditerranée",
       regionFilter: "mediterranee",
       description: "Grottes, épaves, eaux limpides à 3h de Genève",
-      image: "https://images.unsplash.com/photo-1565073624497-7144969b5c3b?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1512548438457-4c9584d3766b?w=900&q=80&fit=crop",
       lien: "plongee.html#mediterranee"
     },
     {
@@ -107,7 +107,7 @@ const NEOS_CONFIG = {
       region: "Atlantique",
       regionFilter: "atlantique",
       description: "Requins bleus, raies manta, cachalots",
-      image: "https://images.unsplash.com/photo-1590341928173-0d680b39ba2c?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=900&q=80&fit=crop",
       lien: "plongee.html#atlantique"
     },
     {
@@ -115,7 +115,7 @@ const NEOS_CONFIG = {
       region: "Asie",
       regionFilter: "asie",
       description: "Temples dorés, plages de rêve et cuisine légendaire",
-      image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=900&q=80&fit=crop",
       lien: "alacarte.html#asie"
     }
   ],
@@ -132,7 +132,7 @@ const NEOS_CONFIG = {
       pays: "Les Açores",
       titre: "Découverte des îles",
       teaser: "Paysages volcaniques, lacs de cratère et rencontres marines.",
-      image: "https://images.unsplash.com/photo-1590341928173-0d680b39ba2c?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80&fit=crop",
       badge: "Coup de cœur",
       prix: "Sur demande",
       lien: "plongee.html#atlantique"
@@ -218,7 +218,7 @@ const NEOS_CONFIG = {
       description: "Épaves, grottes, à 3h de Genève.",
       prix: "Sur demande",
       prixSuffix: "",
-      image: "https://images.unsplash.com/photo-1565073624497-7144969b5c3b?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1512548438457-4c9584d3766b?w=600&q=80&fit=crop",
       lien: "plongee.html#mediterranee"
     }
   ]
@@ -233,69 +233,96 @@ const NEOS_CONFIG = {
   if (typeof window === 'undefined') return;
   window.NEOS_CONFIG = NEOS_CONFIG;
 
+  // Helper: make elements visible right away (bypasses IntersectionObserver timing)
+  function revealAll(container) {
+    // 2-frame RAF ensures the DOM is painted before we add .visible
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        container.querySelectorAll('.reveal').forEach(function(el) {
+          el.classList.add('visible');
+          // Also register with the observer so future off-screen elements animate in
+          if (window._revealObs) window._revealObs.observe(el);
+        });
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
 
     // ── Render destination grid ──────────────────────────────────
-    const destGrid = document.getElementById('dest-grid-dynamic');
+    var destGrid = document.getElementById('dest-grid-dynamic');
     if (destGrid && NEOS_CONFIG.destinations) {
-      destGrid.innerHTML = NEOS_CONFIG.destinations.map((d, i) => `
-        <a href="${d.lien}" class="dest-card reveal" data-region="${d.regionFilter}">
-          <div class="dest-card-bg" style="background-image:url('${d.image}');background-size:cover;background-position:center"></div>
-          <div class="dest-info">
-            <p class="dest-region">${d.region}</p>
-            <h3 class="dest-name">${d.nom}</h3>
-            <p class="dest-desc">${d.description}</p>
-          </div>
-        </a>
-      `).join('');
-      // Re-observe for scroll reveal
-      if (window._revealObs) destGrid.querySelectorAll('.reveal').forEach(el => window._revealObs.observe(el));
+      destGrid.innerHTML = NEOS_CONFIG.destinations.map(function(d) {
+        return '<a href="' + d.lien + '" class="dest-card" data-region="' + d.regionFilter + '">'
+          + '<div class="dest-card-bg" style="background-image:url(\'' + d.image + '\');background-size:cover;background-position:center"></div>'
+          + '<div class="dest-info">'
+          + '<p class="dest-region">' + d.region + '</p>'
+          + '<h3 class="dest-name">' + d.nom + '</h3>'
+          + '<p class="dest-desc">' + d.description + '</p>'
+          + '</div>'
+          + '</a>';
+      }).join('');
+
+      // Show all cards immediately — no invisible state
+      requestAnimationFrame(function() {
+        destGrid.querySelectorAll('.dest-card').forEach(function(card, i) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px) scale(0.97)';
+          setTimeout(function() {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0) scale(1)';
+          }, 60 * i);
+        });
+      });
     }
 
     // ── Render coups de cœur ─────────────────────────────────────
-    const favScroll = document.getElementById('favs-dynamic');
+    var favScroll = document.getElementById('favs-dynamic');
     if (favScroll && NEOS_CONFIG.coupsDeCoeur) {
-      favScroll.innerHTML = NEOS_CONFIG.coupsDeCoeur.map(f => `
-        <article class="fav-card">
-          <div class="fav-img">
-            <div class="dest-card-bg" style="background-image:url('${f.image}');background-size:cover;background-position:center;position:absolute;inset:0"></div>
-            <span class="fav-badge">${f.badge}</span>
-            <button class="fav-heart" data-id="${f.id}" aria-label="Favoris">
-              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-          </div>
-          <div class="fav-body">
-            <p class="fav-country">${f.pays}</p>
-            <h3 class="fav-title">${f.titre}</h3>
-            <p class="fav-teaser">${f.teaser}</p>
-            <div class="fav-footer">
-              <span class="fav-price">${f.prix.includes('CHF') ? f.prix.replace('/ pers.', '') : f.prix}${f.prix.includes('CHF') ? '<small> / pers.</small>' : ''}</span>
-              <a href="${f.lien}" class="exp-link" style="font-size:.72rem">Détails →</a>
-            </div>
-          </div>
-        </article>
-      `).join('');
-      // Re-init fav buttons
+      favScroll.innerHTML = NEOS_CONFIG.coupsDeCoeur.map(function(f) {
+        var priceHtml = f.prix.indexOf('CHF') !== -1
+          ? f.prix.replace('/ pers.', '') + '<small> / pers.</small>'
+          : f.prix;
+        return '<article class="fav-card">'
+          + '<div class="fav-img">'
+          + '<div class="dest-card-bg" style="background-image:url(\'' + f.image + '\');background-size:cover;background-position:center;position:absolute;inset:0"></div>'
+          + '<span class="fav-badge">' + f.badge + '</span>'
+          + '<button class="fav-heart" data-id="' + f.id + '" aria-label="Favoris">'
+          + '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+          + '</button>'
+          + '</div>'
+          + '<div class="fav-body">'
+          + '<p class="fav-country">' + f.pays + '</p>'
+          + '<h3 class="fav-title">' + f.titre + '</h3>'
+          + '<p class="fav-teaser">' + f.teaser + '</p>'
+          + '<div class="fav-footer">'
+          + '<span class="fav-price">' + priceHtml + '</span>'
+          + '<a href="' + f.lien + '" class="exp-link" style="font-size:.72rem">Détails →</a>'
+          + '</div>'
+          + '</div>'
+          + '</article>';
+      }).join('');
       if (window._updateFavBtns) window._updateFavBtns();
     }
 
     // ── Render offres du moment ──────────────────────────────────
-    const offresGrid = document.getElementById('offres-dynamic');
+    var offresGrid = document.getElementById('offres-dynamic');
     if (offresGrid && NEOS_CONFIG.offres) {
-      offresGrid.innerHTML = NEOS_CONFIG.offres.map(o => `
-        <a href="${o.lien}" class="special-card reveal" style="text-decoration:none">
-          <div class="special-img">
-            <div class="dest-card-bg" style="background-image:url('${o.image}');background-size:cover;background-position:center;position:absolute;inset:0"></div>
-          </div>
-          <div class="special-body">
-            <span class="special-tag">${o.tag}</span>
-            <h3 class="special-title">${o.titre}</h3>
-            <p class="special-desc">${o.description}</p>
-            <span class="special-price">${o.prix}${o.prixSuffix ? ` <small>${o.prixSuffix}</small>` : ''}</span>
-          </div>
-        </a>
-      `).join('');
-      if (window._revealObs) offresGrid.querySelectorAll('.reveal').forEach(el => window._revealObs.observe(el));
+      offresGrid.innerHTML = NEOS_CONFIG.offres.map(function(o) {
+        return '<a href="' + o.lien + '" class="special-card reveal" style="text-decoration:none">'
+          + '<div class="special-img">'
+          + '<div class="dest-card-bg" style="background-image:url(\'' + o.image + '\');background-size:cover;background-position:center;position:absolute;inset:0"></div>'
+          + '</div>'
+          + '<div class="special-body">'
+          + '<span class="special-tag">' + o.tag + '</span>'
+          + '<h3 class="special-title">' + o.titre + '</h3>'
+          + '<p class="special-desc">' + o.description + '</p>'
+          + '<span class="special-price">' + o.prix + (o.prixSuffix ? ' <small>' + o.prixSuffix + '</small>' : '') + '</span>'
+          + '</div>'
+          + '</a>';
+      }).join('');
+      revealAll(offresGrid);
     }
   });
 
