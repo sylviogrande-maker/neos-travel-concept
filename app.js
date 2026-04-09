@@ -142,42 +142,55 @@ const counterObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-number[data-count]').forEach(el => counterObs.observe(el));
 
-// ─── HERO SLIDESHOW ───
+// ─── HERO SLIDESHOW — Ken Burns via requestAnimationFrame ───
+// RAF approach: transform is driven by JS, not CSS animation.
+// cancelAnimationFrame() freezes the slide instantly, zero snap risk.
 const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
+const dots   = document.querySelectorAll('.hero-dot');
 if (slides.length > 1) {
+    const KB_MS  = 8000;   // full zoom duration
+    const KB_MAX = 1.08;   // final scale
     let cur = 0, heroInt;
+    let kbRAF, kbStart, kbSlide;
+
+    function kbStep(now) {
+        const t = Math.min((now - kbStart) / KB_MS, 1);
+        kbSlide.style.transform = 'scale(' + (1 + (KB_MAX - 1) * t) + ')';
+        if (t < 1) kbRAF = requestAnimationFrame(kbStep);
+    }
+    function startKB(slide) {
+        kbSlide = slide;
+        kbStart = performance.now();
+        kbRAF   = requestAnimationFrame(kbStep);
+    }
+    function stopKB() {
+        cancelAnimationFrame(kbRAF);
+        // inline style.transform stays frozen — the slide holds its exact position
+    }
+
     function goSlide(n) {
-        const prevSlide = slides[cur];
-        // ── CRITICAL FIX: freeze the current transform before removing `active`
-        // Without this, removing the .active class also removes the CSS animation,
-        // causing an instantaneous snap from scale(1.06) back to scale(1) during fade-out.
-        const frozenTransform = window.getComputedStyle(prevSlide).transform;
-        prevSlide.style.transform = frozenTransform;
-        prevSlide.style.animation = 'none';
-        prevSlide.classList.remove('active');
+        stopKB();                                          // freeze previous slide
+        const prev = slides[cur];
+        prev.classList.remove('active');
         if (dots[cur]) dots[cur].classList.remove('active');
-        // Clean up inline styles after fade-out completes (2s transition + buffer)
-        setTimeout(() => {
-            prevSlide.style.transform = '';
-            prevSlide.style.animation = '';
-        }, 2300);
+        setTimeout(() => { prev.style.transform = ''; }, 2400); // clean up after fade
 
         cur = n;
-        const slide = slides[cur];
-        slide.classList.add('active');
-        // Force Ken Burns restart by triggering a reflow
-        slide.style.animation = 'none';
-        void slide.offsetWidth;
-        slide.style.animation = '';
+        const next = slides[cur];
+        next.style.transform = 'scale(1)';                // reset before entry
+        next.classList.add('active');
         if (dots[cur]) dots[cur].classList.add('active');
+        startKB(next);
     }
+
+    startKB(slides[0]);  // kick off first slide immediately
+
     function nextSlide() { goSlide((cur + 1) % slides.length); }
-    heroInt = setInterval(nextSlide, 6000);
+    heroInt = setInterval(nextSlide, 7000);
     dots.forEach(d => d.addEventListener('click', () => {
         clearInterval(heroInt);
         goSlide(parseInt(d.dataset.slide));
-        heroInt = setInterval(nextSlide, 6000);
+        heroInt = setInterval(nextSlide, 7000);
     }));
 }
 

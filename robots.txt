@@ -1,0 +1,17 @@
+# Robots.txt — NEOS Voyages (www.neos.ch)
+User-agent: *
+Allow: /
+
+# Exclure les pages d'administration et technique
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /tmp/
+Disallow: /logs/
+Disallow: /*?*print=
+Disallow: /*?*debug=
+
+# Sitemap
+Sitemap: https://www.neos.ch/sitemap.xml
+
+# Paramètres d'exploration (éviter indexation de doublons)
+# Les pages PHP avec paramètres sont gérées via canonicals dans le HTML

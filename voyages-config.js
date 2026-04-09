@@ -27,15 +27,15 @@ const NEOS_CONFIG = {
       region: "Océan Indien — Pacifique",
       regionFilter: "ocean-indien",
       description: "Raja Ampat, Komodo, Bali — plongée, croisières et safari sous-marin",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80&fit=crop",
-      lien: "destination.html"
+      image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80&fit=crop",
+      lien: "plongee.html#ocean-indien"
     },
     {
       nom: "Maroc & Sahara",
       region: "Afrique",
       regionFilter: "afrique",
       description: "Treks, culture et désert infini",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1489493585363-d69421e0edd3?w=900&q=80&fit=crop",
       lien: "alacarte.html#afrique"
     },
     {
@@ -58,8 +58,8 @@ const NEOS_CONFIG = {
       nom: "Bhoutan",
       region: "Asie",
       regionFilter: "asie",
-      description: "Le royaume du bonheur",
-      image: "https://images.unsplash.com/photo-1544648284-28534e00ea13?w=900&q=80&fit=crop",
+      description: "Le royaume du bonheur — Tiger's Nest, monastères et randonnées",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop",
       lien: "alacarte.html#asie"
     },
     {
@@ -75,7 +75,7 @@ const NEOS_CONFIG = {
       region: "Mer Rouge",
       regionFilter: "mer-rouge",
       description: "Croisières, épaves mythiques, récifs du sud",
-      image: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=900&q=80&fit=crop",
       lien: "plongee.html#mer-rouge"
     },
     {
@@ -99,7 +99,7 @@ const NEOS_CONFIG = {
       region: "Méditerranée",
       regionFilter: "mediterranee",
       description: "Grottes, épaves, eaux limpides à 3h de Genève",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1565073624497-7144969b5c3b?w=900&q=80&fit=crop",
       lien: "plongee.html#mediterranee"
     },
     {
@@ -107,7 +107,7 @@ const NEOS_CONFIG = {
       region: "Atlantique",
       regionFilter: "atlantique",
       description: "Requins bleus, raies manta, cachalots",
-      image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1590341928173-0d680b39ba2c?w=900&q=80&fit=crop",
       lien: "plongee.html#atlantique"
     },
     {
@@ -115,7 +115,7 @@ const NEOS_CONFIG = {
       region: "Asie",
       regionFilter: "asie",
       description: "Temples dorés, plages de rêve et cuisine légendaire",
-      image: "https://images.unsplash.com/photo-1554931670-4ebfabf46e2c?w=900&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&fit=crop",
       lien: "alacarte.html#asie"
     }
   ],
@@ -132,20 +132,20 @@ const NEOS_CONFIG = {
       pays: "Les Açores",
       titre: "Découverte des îles",
       teaser: "Paysages volcaniques, lacs de cratère et rencontres marines.",
-      image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1590341928173-0d680b39ba2c?w=600&q=80&fit=crop",
       badge: "Coup de cœur",
       prix: "Sur demande",
-      lien: "destination.html"
+      lien: "plongee.html#atlantique"
     },
     {
       id: "laos",
       pays: "Laos",
       titre: "Au Cœur du Laos",
       teaser: "Temples millénaires, croisière sur le Mékong.",
-      image: "https://images.unsplash.com/photo-1604537466158-719b1972feb8?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80&fit=crop",
       badge: "Coup de cœur",
       prix: "Sur demande",
-      lien: "destination.html"
+      lien: "alacarte.html#asie"
     },
     {
       id: "namibie",
@@ -155,27 +155,27 @@ const NEOS_CONFIG = {
       image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80&fit=crop",
       badge: "Coup de cœur",
       prix: "Sur demande",
-      lien: "destination.html"
+      lien: "alacarte.html#afrique"
     },
     {
       id: "egypte",
       pays: "Égypte — Mer Rouge",
       titre: "Croisière St John's",
       teaser: "Nautile Evo, Nitrox offert, récifs immaculés.",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=600&q=80&fit=crop",
       badge: "Plongée",
       prix: "Dès CHF 1'150 / pers.",
-      lien: "destination.html"
+      lien: "plongee.html#mer-rouge"
     },
     {
       id: "costarica",
       pays: "Costa Rica",
       titre: "Nature à l'état brut",
       teaser: "Volcans, forêts tropicales, biodiversité.",
-      image: "https://images.unsplash.com/photo-1536184740561-b2f20c71f13a?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=600&q=80&fit=crop",
       badge: "Coup de cœur",
       prix: "Sur demande",
-      lien: "destination.html"
+      lien: "alacarte.html#amerique"
     }
   ],
 
@@ -191,7 +191,7 @@ const NEOS_CONFIG = {
       description: "Sud Mer Rouge, Nautile Evo. Nitrox offert.",
       prix: "Dès CHF 1'150",
       prixSuffix: "/ pers.",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=600&q=80&fit=crop",
       lien: "plongee.html"
     },
     {
@@ -200,7 +200,7 @@ const NEOS_CONFIG = {
       description: "Nager avec les plus grands poissons du monde.",
       prix: "Sur demande",
       prixSuffix: "",
-      image: "https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=600&q=80&fit=crop",
+      image: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=600&q=80&fit=crop",
       lien: "plongee.html"
     },
     {
@@ -210,7 +210,7 @@ const NEOS_CONFIG = {
       prix: "Sur demande",
       prixSuffix: "",
       image: "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=80&fit=crop",
-      lien: "plongee.html"
+      lien: "plongee.html#caraibes"
     },
     {
       tag: "Méditerranée",
@@ -218,8 +218,8 @@ const NEOS_CONFIG = {
       description: "Épaves, grottes, à 3h de Genève.",
       prix: "Sur demande",
       prixSuffix: "",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80&fit=crop",
-      lien: "plongee.html"
+      image: "https://images.unsplash.com/photo-1565073624497-7144969b5c3b?w=600&q=80&fit=crop",
+      lien: "plongee.html#mediterranee"
     }
   ]
 
