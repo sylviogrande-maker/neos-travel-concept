@@ -177,6 +177,59 @@
 .map-legend-dot { width:8px; height:8px; border-radius:50%; background:#e8734a; }
 .map-legend-home { background:#f4e8d1; }
 .map-legend-label { font-size:.68rem; color:rgba(244,232,209,.4); letter-spacing:.06em; }
+
+/* ── MOBILE MAP ALTERNATIVE (desktop: invisible) ── */
+.mobile-map-alt { display:none; }
+@media(max-width:768px){
+  #worldMap { display:none !important; }
+  .map-legend { display:none !important; }
+  .mobile-map-alt { display:block; padding:.25rem 0 .5rem; }
+  .mma-stats {
+    display:flex; justify-content:center; align-items:baseline;
+    gap:.7rem; margin-bottom:1.4rem; flex-wrap:wrap;
+  }
+  .mma-stats em {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:normal; font-size:1.6rem; color:#f4e8d1;
+    font-weight:300; line-height:1;
+  }
+  .mma-stats span {
+    font-size:.65rem; color:rgba(244,232,209,.35);
+    letter-spacing:.12em; text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:.15rem;
+  }
+  .mma-stats .mma-sep { font-size:1rem; color:#e8734a; opacity:.4;
+    align-self:center; flex-direction:row;
+  }
+  .mma-ticker-wrap {
+    overflow:hidden; position:relative;
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:.7rem 0; margin-bottom:1.3rem;
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  }
+  .mma-ticker {
+    display:inline-flex; white-space:nowrap;
+    animation:mmaTick 40s linear infinite;
+    will-change:transform;
+  }
+  .mma-ticker-wrap:hover .mma-ticker { animation-play-state:paused; }
+  .mma-ticker .d { font-size:.72rem; color:rgba(244,232,209,.5);
+    letter-spacing:.06em; padding:0 .55rem; }
+  .mma-ticker .s { color:#e8734a; opacity:.45; padding:0; font-size:.6rem; }
+  @keyframes mmaTick {
+    0%   { transform:translateX(0); }
+    100% { transform:translateX(-50%); }
+  }
+  .mma-cta {
+    display:block; text-align:center;
+    font-size:.65rem; color:rgba(232,115,74,.7);
+    letter-spacing:.15em; text-transform:uppercase;
+    text-decoration:none; transition:color .2s;
+  }
+  .mma-cta:active { color:#e8734a; }
+}
 </style>
 
 <section id="carte" style="padding:5rem 0;background:linear-gradient(160deg,#07101e 0%,#0c1f38 40%,#091c14 100%);overflow:hidden">
@@ -187,6 +240,68 @@
     <p class="section-sub reveal" style="color:rgba(244,232,209,.4);margin:0 auto">Survolez une destination pour en savoir plus</p>
   </div>
   <div id="worldMap" class="reveal"></div>
+
+  <!-- Mobile only — invisible sur desktop via CSS -->
+  <div class="mobile-map-alt">
+    <div class="mma-stats">
+      <span><em>45</em>destinations</span>
+      <span class="mma-sep">·</span>
+      <span><em>11</em>régions</span>
+      <span class="mma-sep">·</span>
+      <span><em>7</em>océans</span>
+    </div>
+    <div class="mma-ticker-wrap">
+      <div class="mma-ticker">
+        <span class="d">Malte</span><span class="s">·</span>
+        <span class="d">Maldives</span><span class="s">·</span>
+        <span class="d">Bhoutan</span><span class="s">·</span>
+        <span class="d">Polynésie</span><span class="s">·</span>
+        <span class="d">Antarctique</span><span class="s">·</span>
+        <span class="d">Kenya</span><span class="s">·</span>
+        <span class="d">Japon</span><span class="s">·</span>
+        <span class="d">Açores</span><span class="s">·</span>
+        <span class="d">Égypte</span><span class="s">·</span>
+        <span class="d">Indonésie</span><span class="s">·</span>
+        <span class="d">Costa Rica</span><span class="s">·</span>
+        <span class="d">Seychelles</span><span class="s">·</span>
+        <span class="d">Népal</span><span class="s">·</span>
+        <span class="d">Cuba</span><span class="s">·</span>
+        <span class="d">Namibie</span><span class="s">·</span>
+        <span class="d">Thaïlande</span><span class="s">·</span>
+        <span class="d">Philippines</span><span class="s">·</span>
+        <span class="d">Islande</span><span class="s">·</span>
+        <span class="d">Jordanie</span><span class="s">·</span>
+        <span class="d">Galápagos</span><span class="s">·</span>
+        <span class="d">Maroc</span><span class="s">·</span>
+        <span class="d">Vietnam</span><span class="s">·</span>
+        <!-- Répétition pour boucle seamless -->
+        <span class="d">Malte</span><span class="s">·</span>
+        <span class="d">Maldives</span><span class="s">·</span>
+        <span class="d">Bhoutan</span><span class="s">·</span>
+        <span class="d">Polynésie</span><span class="s">·</span>
+        <span class="d">Antarctique</span><span class="s">·</span>
+        <span class="d">Kenya</span><span class="s">·</span>
+        <span class="d">Japon</span><span class="s">·</span>
+        <span class="d">Açores</span><span class="s">·</span>
+        <span class="d">Égypte</span><span class="s">·</span>
+        <span class="d">Indonésie</span><span class="s">·</span>
+        <span class="d">Costa Rica</span><span class="s">·</span>
+        <span class="d">Seychelles</span><span class="s">·</span>
+        <span class="d">Népal</span><span class="s">·</span>
+        <span class="d">Cuba</span><span class="s">·</span>
+        <span class="d">Namibie</span><span class="s">·</span>
+        <span class="d">Thaïlande</span><span class="s">·</span>
+        <span class="d">Philippines</span><span class="s">·</span>
+        <span class="d">Islande</span><span class="s">·</span>
+        <span class="d">Jordanie</span><span class="s">·</span>
+        <span class="d">Galápagos</span><span class="s">·</span>
+        <span class="d">Maroc</span><span class="s">·</span>
+        <span class="d">Vietnam</span><span class="s">·</span>
+      </div>
+    </div>
+    <a href="plongee.html" class="mma-cta">Explorer toutes les destinations →</a>
+  </div>
+
   <div class="map-legend" style="margin-top:1.4rem">
     <div class="map-legend-item"><div class="map-legend-dot"></div><span class="map-legend-label">Destination NEOS</span></div>
     <div class="map-legend-item"><div class="map-legend-dot map-legend-home"></div><span class="map-legend-label">Genève (Base)</span></div>
