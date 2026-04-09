@@ -215,9 +215,10 @@
     will-change:transform;
   }
   .mma-ticker-wrap:hover .mma-ticker { animation-play-state:paused; }
-  .mma-ticker .d { font-size:.72rem; color:rgba(244,232,209,.5);
-    letter-spacing:.06em; padding:0 .55rem; }
-  .mma-ticker .s { color:#e8734a; opacity:.45; padding:0; font-size:.6rem; }
+  .mma-ticker .d { font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic; font-size:.88rem; color:rgba(244,232,209,.45);
+    letter-spacing:.03em; padding:0 1.2rem; font-weight:300; }
+  .mma-ticker .s { color:#e8734a; opacity:.35; padding:0; font-size:.55rem; }
   @keyframes mmaTick {
     0%   { transform:translateX(0); }
     100% { transform:translateX(-50%); }
@@ -243,60 +244,19 @@
 
   <!-- Mobile only — invisible sur desktop via CSS -->
   <div class="mobile-map-alt">
-    <div class="mma-stats">
-      <span><em>45</em>destinations</span>
-      <span class="mma-sep">·</span>
-      <span><em>11</em>régions</span>
-      <span class="mma-sep">·</span>
-      <span><em>7</em>océans</span>
-    </div>
     <div class="mma-ticker-wrap">
       <div class="mma-ticker">
-        <span class="d">Malte</span><span class="s">·</span>
-        <span class="d">Maldives</span><span class="s">·</span>
-        <span class="d">Bhoutan</span><span class="s">·</span>
-        <span class="d">Polynésie</span><span class="s">·</span>
-        <span class="d">Antarctique</span><span class="s">·</span>
-        <span class="d">Kenya</span><span class="s">·</span>
-        <span class="d">Japon</span><span class="s">·</span>
-        <span class="d">Açores</span><span class="s">·</span>
-        <span class="d">Égypte</span><span class="s">·</span>
-        <span class="d">Indonésie</span><span class="s">·</span>
-        <span class="d">Costa Rica</span><span class="s">·</span>
-        <span class="d">Seychelles</span><span class="s">·</span>
-        <span class="d">Népal</span><span class="s">·</span>
-        <span class="d">Cuba</span><span class="s">·</span>
-        <span class="d">Namibie</span><span class="s">·</span>
-        <span class="d">Thaïlande</span><span class="s">·</span>
-        <span class="d">Philippines</span><span class="s">·</span>
-        <span class="d">Islande</span><span class="s">·</span>
-        <span class="d">Jordanie</span><span class="s">·</span>
-        <span class="d">Galápagos</span><span class="s">·</span>
-        <span class="d">Maroc</span><span class="s">·</span>
-        <span class="d">Vietnam</span><span class="s">·</span>
+        <span class="d">&ldquo;&thinsp;Voyager, c'est naître à nouveau.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;L'aventure commence où la carte s'arrête.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Voyager est la seule dépense qui vous rend plus riche.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Le monde est un livre — ne pas voyager, c'est n'en lire qu'une page.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Partir, c'est déjà arriver ailleurs.&thinsp;&rdquo;</span><span class="s">✦</span>
         <!-- Répétition pour boucle seamless -->
-        <span class="d">Malte</span><span class="s">·</span>
-        <span class="d">Maldives</span><span class="s">·</span>
-        <span class="d">Bhoutan</span><span class="s">·</span>
-        <span class="d">Polynésie</span><span class="s">·</span>
-        <span class="d">Antarctique</span><span class="s">·</span>
-        <span class="d">Kenya</span><span class="s">·</span>
-        <span class="d">Japon</span><span class="s">·</span>
-        <span class="d">Açores</span><span class="s">·</span>
-        <span class="d">Égypte</span><span class="s">·</span>
-        <span class="d">Indonésie</span><span class="s">·</span>
-        <span class="d">Costa Rica</span><span class="s">·</span>
-        <span class="d">Seychelles</span><span class="s">·</span>
-        <span class="d">Népal</span><span class="s">·</span>
-        <span class="d">Cuba</span><span class="s">·</span>
-        <span class="d">Namibie</span><span class="s">·</span>
-        <span class="d">Thaïlande</span><span class="s">·</span>
-        <span class="d">Philippines</span><span class="s">·</span>
-        <span class="d">Islande</span><span class="s">·</span>
-        <span class="d">Jordanie</span><span class="s">·</span>
-        <span class="d">Galápagos</span><span class="s">·</span>
-        <span class="d">Maroc</span><span class="s">·</span>
-        <span class="d">Vietnam</span><span class="s">·</span>
+        <span class="d">&ldquo;&thinsp;Voyager, c'est naître à nouveau.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;L'aventure commence où la carte s'arrête.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Voyager est la seule dépense qui vous rend plus riche.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Le monde est un livre — ne pas voyager, c'est n'en lire qu'une page.&thinsp;&rdquo;</span><span class="s">✦</span>
+        <span class="d">&ldquo;&thinsp;Partir, c'est déjà arriver ailleurs.&thinsp;&rdquo;</span><span class="s">✦</span>
       </div>
     </div>
     <a href="plongee.html" class="mma-cta">Explorer toutes les destinations →</a>
