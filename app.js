@@ -148,14 +148,27 @@ const dots = document.querySelectorAll('.hero-dot');
 if (slides.length > 1) {
     let cur = 0, heroInt;
     function goSlide(n) {
-        slides[cur].classList.remove('active');
+        const prevSlide = slides[cur];
+        // ── CRITICAL FIX: freeze the current transform before removing `active`
+        // Without this, removing the .active class also removes the CSS animation,
+        // causing an instantaneous snap from scale(1.06) back to scale(1) during fade-out.
+        const frozenTransform = window.getComputedStyle(prevSlide).transform;
+        prevSlide.style.transform = frozenTransform;
+        prevSlide.style.animation = 'none';
+        prevSlide.classList.remove('active');
         if (dots[cur]) dots[cur].classList.remove('active');
+        // Clean up inline styles after fade-out completes (2s transition + buffer)
+        setTimeout(() => {
+            prevSlide.style.transform = '';
+            prevSlide.style.animation = '';
+        }, 2300);
+
         cur = n;
         const slide = slides[cur];
         slide.classList.add('active');
-        // Force restart of Ken Burns CSS animation on each slide activation
+        // Force Ken Burns restart by triggering a reflow
         slide.style.animation = 'none';
-        void slide.offsetWidth; // trigger reflow to reset animation
+        void slide.offsetWidth;
         slide.style.animation = '';
         if (dots[cur]) dots[cur].classList.add('active');
     }
