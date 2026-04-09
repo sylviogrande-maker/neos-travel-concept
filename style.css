@@ -353,7 +353,7 @@ footer{background:var(--deep);padding:5rem 0 2rem;color:rgba(244,232,209,.45);bo
     .contact-inner{grid-template-columns:1fr}
     .specials-grid{grid-template-columns:1fr}
     .themes-grid{grid-template-columns:repeat(3,1fr)}
-    .exp-grid{grid-template-columns:1fr}
+    .exp-grid{grid-template-columns:repeat(2,1fr)}
     .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
 }
 @media(max-width:768px){
@@ -364,25 +364,67 @@ footer{background:var(--deep);padding:5rem 0 2rem;color:rgba(244,232,209,.45);bo
     .dest-card:nth-child(1){grid-column:span 2;grid-row:span 1}
     .dest-card:nth-child(n+2){grid-column:span 1;grid-row:span 1}
     .dest-card:nth-child(4){grid-column:span 2}
-    .fav-card{flex:0 0 280px}
+    .fav-card{flex:0 0 80vw;max-width:320px}
     .trust-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
     .special-card{grid-template-columns:1fr}
     .special-img{height:180px}
     .form-row{grid-template-columns:1fr}
     .philo-values{grid-template-columns:1fr}
     .themes-grid{grid-template-columns:repeat(2,1fr)}
+    .exp-grid{grid-template-columns:1fr}
     .footer-grid{grid-template-columns:1fr}
     .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
     .hero-dots{bottom:6rem;right:50%;transform:translateX(50%)}
     .cookie-banner{flex-direction:column;text-align:center}
     .mega-menu{display:none}
+    /* Section padding réduit sur mobile */
+    section[style*="padding"]{padding-top:4rem!important;padding-bottom:4rem!important}
+    div[style*="margin-bottom:4rem"]{margin-bottom:2rem!important}
+    footer{padding-top:3rem!important;padding-bottom:1.5rem!important}
+    .contact-form{padding:1.5rem}
+    .philo-img{height:260px}
+    .filter-btn{padding:.65rem 1.1rem;min-height:44px}
+    .region-filters{gap:.3rem}
+    .hero-actions{flex-wrap:wrap;gap:.75rem}
 }
 @media(max-width:480px){
     .dest-grid{grid-template-columns:1fr}
     .dest-card:nth-child(n){grid-column:span 1;grid-row:span 1}
     .themes-grid{grid-template-columns:1fr 1fr}
-    .stats-grid{grid-template-columns:1fr 1fr}
+    .stats-grid{grid-template-columns:1fr 1fr;gap:1rem}
     .container{padding:0 1.2rem}
+    /* Section padding encore plus réduit */
+    section[style*="padding"]{padding-top:2.8rem!important;padding-bottom:2.8rem!important}
+    /* Hero pleine hauteur mobile réelle (sans barre navigateur) */
+    .hero{min-height:100svh}
+    /* Boutons hero empilés sur très petit écran */
+    .hero-actions{flex-direction:column;align-items:center}
+    .hero-actions .btn{width:100%;max-width:260px;justify-content:center}
+    /* Cartes coups de coeur */
+    .fav-card{flex:0 0 88vw;max-width:340px}
+    /* Formulaire */
+    .contact-form{padding:1.2rem}
+    .exp-card-body{padding:1.2rem 1rem}
+}
+
+/* ── MOBILE MAP ALTERNATIVE ── */
+.mobile-dest-list{display:none}
+@media(max-width:768px){
+    #worldMap,.map-legend{display:none!important}
+    .mobile-dest-list{display:block;margin-top:.5rem}
+    .mobile-region{margin-bottom:1.8rem}
+    .mobile-region-title{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--coral);margin-bottom:.7rem;font-weight:600}
+    .mobile-region-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+    .mobile-dest-tag{display:inline-flex;align-items:center;padding:.42rem 1rem;border:1px solid rgba(244,232,209,.13);border-radius:100px;font-size:.76rem;color:rgba(244,232,209,.6);transition:all .25s;text-decoration:none;line-height:1}
+    .mobile-dest-tag:active{background:rgba(232,115,74,.18);border-color:rgba(232,115,74,.45);color:var(--sand)}
+    .mobile-dest-list-footer{text-align:center;margin-top:2rem}
+    .mobile-dest-list-footer p{font-size:.68rem;color:rgba(244,232,209,.25);letter-spacing:.1em}
+}
+
+/* ── TOUCH DEVICES — pas de curseur custom ── */
+@media(hover:none),(pointer:coarse){
+    .cursor-dot,.cursor-ring{display:none!important}
+    body.cursor-active *{cursor:auto!important}
 }
 
 /* ── REDUCED MOTION ── */
